@@ -393,11 +393,15 @@ def render_npc(scene):
         st.session_state.scene = 40
 
 # Main render function
+# 1. Hàm tiện ích để chuyển cảnh và rerun ngay
 def go_to_scene(next_scene):
     st.session_state.scene = next_scene
     st.experimental_rerun()
+
+# 2. Hàm render_scene được rút gọn
 def render_scene():
     sc = st.session_state.scene
+
     # Scene 1
     if sc == 1:
         lines = [
@@ -419,6 +423,7 @@ def render_scene():
             args=(2,)
         ):
             return
+
     # Scene 2
     elif sc == 2:
         st.write("**Bạn đã sẵn sàng tiến vào hành trình này chưa?**")
@@ -437,6 +442,7 @@ def render_scene():
         )
         st.caption("Không tìm thấy nút từ bỏ đâu, đừng cố tìm")
         return
+
     # Scene 3
     elif sc == 3:
         st.write("### Cẩm nang bắt đầu kết nối thế giới DLP4 dành cho Học viên mới")
@@ -451,6 +457,7 @@ def render_scene():
                 args=(4 + idx,)
             )
         return
+
     # Scenes 4–6
     elif sc in staff_options:
         for name, nxt in staff_options[sc]:
@@ -461,10 +468,12 @@ def render_scene():
                 args=(nxt,)
             )
         return
+
     # Scenes 7–39
     elif 7 <= sc <= 39:
         render_npc(sc)
         return
+
     # Scene 40
     elif sc == 40:
         st.write("## Hành trình DLP4 sắp bắt đầu")
@@ -475,7 +484,7 @@ def render_scene():
             args=(41,)
         )
         return
+
     # Scene 41
     elif sc == 41:
         st.write("Exercising Leadership in a VUCA world entering......")
-
