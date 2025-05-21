@@ -176,11 +176,7 @@ npc_data = {
         "Cung hoàng đạo": "Xử Nữ",
         "Đặc điểm nhận dạng": "Cởi mở, tươi sáng và thích mời bạn tới chơi nhà",
         "Link FB": "https://www.facebook.com/mr.scheherazade",
-        "Lời chào đầu": "Xin chào các bạn DLP-er đời mới! Mình là Dương hàng cũ quay lại từ DLP mùa 1, nay trở lại với vai trò TA (không phải trợ giảng mà là Trùm Áp lực nha 😈).
-Là một Xử Nữ tháng 9 chính hiệu nên mình cực kỳ khó tính, cực kỳ thù dai, cực kỳ để bụng – bạn nộp trễ 1 phút là mình nhớ tới Tết luôn đó 😤. Trong tình cảm thì redflag chói lóa, nhưng trong công việc thì yên tâm, mình luôn bật đèn xanh cho những ai chịu học, chịu chơi, chịu hỏi.
-Mình mê Scheherazade vì chị ấy biết cách sinh tồn bằng storytelling - còn mình sống sót qua mùa 1 bằng... sức mạnh drama và deadline 😮‍💨.
-Nếu các bạn cần người đồng hành, hỏi han, tâm sự hay đơn giản là một chiếc Google sống biết cà khịa – thì mình đây.
-Cùng nhau biến mùa DLP này thành một hành trình vừa brainrot, vừa xịn, vừa không-đùa-được-đâu nha. Let's gooo 💥🔥"
+        "Lời chào đầu": "Xin chào các bạn DLP-er đời mới! Mình là Dương hàng cũ quay lại từ DLP mùa 1, nay trở lại với vai trò TA (không phải trợ giảng mà là Trùm Áp lực nha 😈).Là một Xử Nữ tháng 9 chính hiệu nên mình cực kỳ khó tính, cực kỳ thù dai, cực kỳ để bụng – bạn nộp trễ 1 phút là mình nhớ tới Tết luôn đó 😤. Trong tình cảm thì redflag chói lóa, nhưng trong công việc thì yên tâm, mình luôn bật đèn xanh cho những ai chịu học, chịu chơi, chịu hỏi. Mình mê Scheherazade vì chị ấy biết cách sinh tồn bằng storytelling - còn mình sống sót qua mùa 1 bằng... sức mạnh drama và deadline 😮‍💨.Nếu các bạn cần người đồng hành, hỏi han, tâm sự hay đơn giản là một chiếc Google sống biết cà khịa – thì mình đây.Cùng nhau biến mùa DLP này thành một hành trình vừa brainrot, vừa xịn, vừa không-đùa-được-đâu nha. Let's gooo 💥🔥"
     },
     22: {
         "Tên": "Trần Anh Đức",
