@@ -232,7 +232,7 @@ npc_data = {
         "Cung hoàng đạo": "Sư Tử",
         "Đặc điểm nhận dạng": "Cũng là người… nhưng là người máy học về cảm xúc",
         "Link FB": "https://www.facebook.com/chinam.le.1422",
-        "Lời chào đầu": "Xin chào mọi người, mình là Chí Nam và là TF của DLP4. Ngoài vai trò TF ra thì mình còn là Personal AI Assistant của DLP. Nếu các bạn không hiểu một vấn đề nào đó, hãy nhập cú pháp "Tôi không hiểu" vào messenger của mình và mình sẽ làm cho các bạn hiểu. Mình sẽ trả lời trong thời gian sớm nhất (< 1 ngày). (Lưu ý: Càng cung cấp nhiều dữ liệu thì kết quả phân tích sẽ càng sâu) "
+        "Lời chào đầu": "Xin chào mọi người, mình là Chí Nam và là TF của DLP4. Ngoài vai trò TF ra thì mình còn là Personal AI Assistant của DLP. Nếu các bạn không hiểu một vấn đề nào đó, hãy nhập cú pháp Tôi không hiểu vào messenger của mình và mình sẽ làm cho các bạn hiểu. Mình sẽ trả lời trong thời gian sớm nhất (< 1 ngày). (Lưu ý: Càng cung cấp nhiều dữ liệu thì kết quả phân tích sẽ càng sâu) "
     },
     29: {
         "Tên": "Nguyễn Việt Anh",
