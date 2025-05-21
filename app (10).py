@@ -382,10 +382,14 @@ def render_npc(scene):
     # Chọn ngẫu nhiên emoji
     emoji = random.choice(list(npc_emojis.values()))
     typewriter(f"{emoji}  Tên: {data.get('Tên','')}")
-    
-    for k, v in data.items():
-        if k != 'Tên':
-            typewriter(f"{k}: {v}")
+         
+for k, v in data.items():
+    if k == 'Tên':
+        continue
+    elif k == 'Link FB':
+        st.markdown(f"**{k}:** [{v}]({v})")
+    else:
+        typewriter(f"{k}: {v}")
     st.write("---")
     
     # Chọn ngẫu nhiên animal
