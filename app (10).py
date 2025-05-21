@@ -408,11 +408,8 @@ def render_scene():
         ]
         for l in lines:
             typewriter(l)
-        if st.button(
-            "Tiếp tục",
-            key="continue",
-            on_click=go_to_scene,
-            args=(2,)
+       if st.button("Tiếp tục", key="continue"):
+           go_to_scene(2)
 )
         return
     if sc == 2:
