@@ -26,7 +26,6 @@ def typewriter(text, speed=0.02):
 # 1) go_to_scene: cập nhật scene + rerun ngay
 def go_to_scene(next_scene):
     st.session_state.scene = next_scene
-    st.experimental_rerun()
 
 # Staff selection mapping for scenes 4-6
 staff_options = {
