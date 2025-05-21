@@ -208,7 +208,7 @@ npc_data = {
         "Cung hoàng đạo": "Bảo Bình",
         "Đặc điểm nhận dạng": "công tắc bật nước mắt của DLPer...",
         "Link FB": "https://www.facebook.com/thaoanh.cht",
-        "Lời chào đầu": "Lời đầu tiên, cho phép mình xin được gửi lời chào nồng nhiệt nhất tới quý vị học viên đang theo dõi chuyên mục "DLP4 - một chốn yên bình". Do thời lượng có hạn, mình xin phép kết thúc chương trình tại đây, chúc các bạn ăn nhanh chóng lớn - hăng say học tập!"
+        "Lời chào đầu": "Lời đầu tiên, cho phép mình xin được gửi lời chào nồng nhiệt nhất tới quý vị học viên đang theo dõi chuyên mục DLP4 - một chốn yên bình. Do thời lượng có hạn, mình xin phép kết thúc chương trình tại đây, chúc các bạn ăn nhanh chóng lớn - hăng say học tập!"
     },
     26: {
         "Tên": "Tá Mai Linh",
