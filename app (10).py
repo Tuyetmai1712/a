@@ -360,6 +360,10 @@ animal_list = [
     ("🐗","Bạn mạnh mẽ như lợn rừng, vượt obstacles."),
     ("🐁","Bạn tinh tế như chuột, tìm bug."),
     ("🐂","Bạn quyết đoán như bò tót, chịu trách nhiệm."),
+    ("🦩", "Bạn quý phái như chim hồng hạc, tỏa sáng mọi Class Days."),
+    ("🦎", "Bạn thay đổi sắc màu như tắc kè, thích nghi siêu nhanh."),
+    ("🦜", "Bạn sôi nổi như vẹt, luôn truyền cảm hứng bằng lời nói."),
+    ("🦝", "Bạn tinh quái như gấu mèo, khám phá mọi ngóc ngách kiến thức."),
     ("🦘","Bạn nhảy nhót như kangaroo, truyền cảm hứng.")
 ]
 npc_animal_map = {scene: animal_list[i] for i, scene in enumerate(range(7,40))}
@@ -369,23 +373,40 @@ if 'scene' not in st.session_state:
     st.session_state.scene = 1
 
 # Hiển thị NPC scenes
-def render_npc(sc):
-    d = npc_data[sc]
-    emoji = npc_emojis[sc]
-    typewriter(f"{emoji}  Tên: {d['Tên']}")
-    for k,v in d.items():
-        if k!="Tên": typewriter(f"{k}: {v}")
-    st.write("---")
-    icon,desc = npc_animal_map[sc]
-    st.write(f"{icon}  **{desc}**")
-    c1,c2 = st.columns(2)
-    c1.button("Quay lại trang chủ",
-              key=f"back_{sc}",
-              on_click=go_to_scene, args=(3,))
-    c2.button("Nạp xong dữ liệu tiếp tục hành trình",
-              key=f"cont_{sc}",
-              on_click=go_to_scene, args=(40,))
+import random
 
+# giữ nguyên định nghĩa npc_emojis (dict) và animal_list (list) bên trên
+
+def render_npc(scene):
+    data = npc_data.get(scene, {})
+    
+    # Chọn ngẫu nhiên emoji
+    emoji = random.choice(list(npc_emojis.values()))
+    typewriter(f"{emoji}  Tên: {data.get('Tên','')}")
+    
+    for k, v in data.items():
+        if k != 'Tên':
+            typewriter(f"{k}: {v}")
+    st.write("---")
+    
+    # Chọn ngẫu nhiên animal
+    icon, desc = random.choice(animal_list)
+    st.write(f"{icon}  **{desc}**")
+    
+    c1, c2 = st.columns(2)
+    c1.button(
+        "Quay lại trang chủ",
+        key=f"back_{scene}",
+        on_click=go_to_scene,
+        args=(3,)
+    )
+    c2.button(
+        "Nạp xong dữ liệu tiếp tục hành trình",
+        key=f"cont_{scene}",
+        on_click=go_to_scene,
+        args=(40,)
+    )
+         
 # Hàm chính render_scene
 def render_scene():
     sc = st.session_state.scene
