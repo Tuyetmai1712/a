@@ -378,10 +378,12 @@ import random
 
 def render_npc(scene):
     data = npc_data.get(scene, {})
+    
+    # Chọn ngẫu nhiên emoji
     emoji = random.choice(list(npc_emojis.values()))
     typewriter(f"{emoji}  Tên: {data.get('Tên','')}")
-
-    # Hiển thị các trường còn lại
+    
+   # Hiển thị các trường còn lại
     for k, v in data.items():
         if k == 'Tên':
             continue
@@ -389,15 +391,12 @@ def render_npc(scene):
             st.markdown(f"**{k}:** [{v}]({v})")
         else:
             typewriter(f"{k}: {v}")
-
     st.write("---")
-
-    # Chọn ngẫu nhiên icon động vật hoặc emoticon
-    all_icons = animal_list + npc_emojis
-    icon = random.choice(all_icons)
-    st.write(f"{icon}")
-
-    # Nút quay lại và tiếp tục
+    
+    # Chọn ngẫu nhiên animal
+    icon, desc = random.choice(animal_list)
+    st.write(f"{icon}  **{desc}**")
+    
     c1, c2 = st.columns(2)
     c1.button(
         "Quay lại trang chủ",
@@ -412,7 +411,6 @@ def render_npc(scene):
         args=(40,)
     )
 
-         
 # Hàm chính render_scene
 def render_scene():
     sc = st.session_state.scene
