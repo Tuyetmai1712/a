@@ -393,7 +393,7 @@ def render_npc(scene):
     st.write("---")
 
     # Chọn ngẫu nhiên icon động vật hoặc emoticon
-    all_icons = animal_icons + emoticon_icons
+    all_icons = animal_list + npc_emojis
     icon = random.choice(all_icons)
     st.write(f"{icon}")
 
