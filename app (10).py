@@ -383,7 +383,7 @@ def render_npc(scene):
     emoji = random.choice(list(npc_emojis.values()))
     typewriter(f"{emoji}  Tên: {data.get('Tên','')}")
          
-for k, v in data.items():
+    for k, v in data.items():
     if k == 'Tên':
         continue
     elif k == 'Link FB':
