@@ -408,7 +408,7 @@ def render_scene():
         ]
         for l in lines:
             typewriter(l)
-       if st.button("Tiếp tục", key="continue"):
+    if st.button("Tiếp tục", key="continue"):
            go_to_scene(2)
 )
         return
@@ -429,15 +429,17 @@ def render_scene():
     )
     st.caption("Không tìm thấy nút từ bỏ đâu, đừng cố tìm")
     return
-    if sc == 3:
-        st.write("### Cẩm nang bắt đầu kết nối thế giới DLP4 dành cho Học viên mới")
-        st.write("Gói tìm hiểu về các Staff")
-        cols = st.columns(3)
-        opts = ["Teaching Assistants","Teaching Fellows","Instructors"]
-        for i, btn in enumerate(cols):
-            if btn.button(opts[i]):
-                st.session_state.scene = 4 + i
-        return
+   if sc == 3:
+       cols = st.columns(3)
+       choices = ["Teaching Assistants","Teaching Fellows","Instructors"]
+       for idx, btn in enumerate(cols):
+           btn.button(
+               choices[idx],
+               key=f"staff_cat_{idx}",
+               on_click=go_to_scene,
+               args=(4 + idx,)
+           )
+           return
     if sc in staff_options:
         for name, nxt in staff_options[sc]:
             if st.button(name):
