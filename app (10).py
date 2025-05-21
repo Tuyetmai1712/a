@@ -1,38 +1,32 @@
-
 import streamlit as st
 import time
 import random
 
-# Page configuration
+# Page config & CSS
 st.set_page_config(page_title="DLP4 RPG", layout="centered")
-
-# Custom CSS for a light RPG school theme
-st.markdown("""<style>
-body {
-    background-color: #f0f8ff;
-    color: #333333;
-    font-family: 'Courier New', monospace;
-}
-h1, h2, h3 {
-    font-family: 'Courier New', monospace;
-}
-button {
-    background-color: #8b4513;
-    color: #ffffff;
-    border-radius: 8px;
-    padding: 6px 12px;
-    margin: 4px;
-}
-</style>""", unsafe_allow_html=True)
+st.markdown("""
+<style>
+body { background-color: #f0f8ff; color: #333; font-family:'Courier New',monospace;}
+h1,h2,h3 { font-family:'Courier New',monospace;}
+button { background-color:#8b4513;color:#fff;border-radius:8px;
+         padding:6px 12px;margin:4px;}
+</style>
+""", unsafe_allow_html=True)
 
 # Typewriter effect
 def typewriter(text, speed=0.02):
-    placeholder = st.empty()
-    displayed = ""
+    ph = st.empty()
+    disp = ""
     for c in text:
-        displayed += c
-        placeholder.markdown(f"<p style='font-family: monospace; font-size:20px'>{displayed}</p>", unsafe_allow_html=True)
+        disp += c
+        ph.markdown(f"<p style='font-family:monospace;font-size:20px'>{disp}</p>",
+                    unsafe_allow_html=True)
         time.sleep(speed)
+
+# 1) go_to_scene: cập nhật scene + rerun ngay
+def go_to_scene(next_scene):
+    st.session_state.scene = next_scene
+    st.experimental_rerun()
 
 # Staff selection mapping for scenes 4-6
 staff_options = {
@@ -371,120 +365,92 @@ animal_list = [
 ]
 npc_animal_map = {scene: animal_list[i] for i, scene in enumerate(range(7,40))}
 
-# Initialize session state
+# Session init
 if 'scene' not in st.session_state:
     st.session_state.scene = 1
 
-# Helper to render NPC scenes
-def render_npc(scene):
-    data = npc_data[scene]
-    emoji = npc_emojis.get(scene, "")
-    typewriter(f"{emoji}  Tên: {data['Tên']}")
-    for k, v in data.items():
-        if k != 'Tên':
-            typewriter(f"{k}: {v}")
+# Hiển thị NPC scenes
+def render_npc(sc):
+    d = npc_data[sc]
+    emoji = npc_emojis[sc]
+    typewriter(f"{emoji}  Tên: {d['Tên']}")
+    for k,v in d.items():
+        if k!="Tên": typewriter(f"{k}: {v}")
     st.write("---")
-    icon, desc = npc_animal_map[scene]
+    icon,desc = npc_animal_map[sc]
     st.write(f"{icon}  **{desc}**")
-    c1, c2 = st.columns(2)
-    if c1.button("Quay lại trang chủ"):
-        st.session_state.scene = 3
-    if c2.button("Nạp xong dữ liệu tiếp tục hành trình"):
-        st.session_state.scene = 40
+    c1,c2 = st.columns(2)
+    c1.button("Quay lại trang chủ",
+              key=f"back_{sc}",
+              on_click=go_to_scene, args=(3,))
+    c2.button("Nạp xong dữ liệu tiếp tục hành trình",
+              key=f"cont_{sc}",
+              on_click=go_to_scene, args=(40,))
 
-# Main render function
-# 1. Hàm tiện ích để chuyển cảnh và rerun ngay
-def go_to_scene(next_scene):
-    st.session_state.scene = next_scene
-    st.experimental_rerun()
-
-# 2. Hàm render_scene được rút gọn
+# Hàm chính render_scene
 def render_scene():
     sc = st.session_state.scene
 
-    # Scene 1
     if sc == 1:
         lines = [
             "Chào mừng bạn đến với DAV Leadership Programme – Summer Course 2025",
             "Một hành trình mới sắp bắt đầu, chúc bạn chân cứng đá mềm",
-            "Mình là Phạm Tuyết Mai",
-            "Mai trong Hoa Mai 🌸",
+            "Mình là Phạm Tuyết Mai", "Mai trong Hoa Mai 🌸",
             "Tuyết trong Bông Tuyết ❄️",
             "Phạm là họ bố..........................",
             "Mình sẽ là Instructor đi cùng với bạn hết hành trình DLP4 này",
             "Cảm Ơn Vì Đã Đến"
         ]
-        for l in lines:
-            typewriter(l)
-        if st.button(
-            "Tiếp tục",
-            key="scene1_continue",
-            on_click=go_to_scene,
-            args=(2,)
-        ):
+        for l in lines: typewriter(l)
+        if st.button("Tiếp tục",
+                     key="s1",
+                     on_click=go_to_scene, args=(2,)):
             return
 
-    # Scene 2
     elif sc == 2:
         st.write("**Bạn đã sẵn sàng tiến vào hành trình này chưa?**")
-        c1, c2 = st.columns(2)
-        c1.button(
-            "Tôi rất sẵn sàng",
-            key="ready_1",
-            on_click=go_to_scene,
-            args=(3,)
-        )
-        c2.button(
-            "Tôi vẫn rất sẵn sàng",
-            key="ready_2",
-            on_click=go_to_scene,
-            args=(3,)
-        )
+        c1,c2 = st.columns(2)
+        c1.button("Tôi rất sẵn sàng", key="s2a",
+                  on_click=go_to_scene, args=(3,))
+        c2.button("Tôi vẫn rất sẵn sàng", key="s2b",
+                  on_click=go_to_scene, args=(3,))
         st.caption("Không tìm thấy nút từ bỏ đâu, đừng cố tìm")
         return
 
-    # Scene 3
     elif sc == 3:
         st.write("### Cẩm nang bắt đầu kết nối thế giới DLP4 dành cho Học viên mới")
         st.write("Gói tìm hiểu về các Staff")
         cols = st.columns(3)
-        choices = ["Teaching Assistants", "Teaching Fellows", "Instructors"]
-        for idx, btn in enumerate(cols):
-            btn.button(
-                choices[idx],
-                key=f"staff_cat_{idx}",
-                on_click=go_to_scene,
-                args=(4 + idx,)
-            )
+        opts = ["Teaching Assistants","Teaching Fellows","Instructors"]
+        for i,btn in enumerate(cols):
+            btn.button(opts[i],
+                       key=f"s3_{i}",
+                       on_click=go_to_scene,
+                       args=(4+i,))
         return
 
-    # Scenes 4–6
     elif sc in staff_options:
-        for name, nxt in staff_options[sc]:
-            st.button(
-                name,
-                key=f"staff_{sc}_{name}",
-                on_click=go_to_scene,
-                args=(nxt,)
-            )
+        for name,nxt in staff_options[sc]:
+            st.button(name,
+                      key=f"s{sc}_{name}",
+                      on_click=go_to_scene,
+                      args=(nxt,))
         return
 
-    # Scenes 7–39
     elif 7 <= sc <= 39:
         render_npc(sc)
         return
 
-    # Scene 40
     elif sc == 40:
         st.write("## Hành trình DLP4 sắp bắt đầu")
-        st.button(
-            "Nhập vai Học viên, tiến vào DLP4",
-            key="to_scene41",
-            on_click=go_to_scene,
-            args=(41,)
-        )
+        st.button("Nhập vai Học viên, tiến vào DLP4",
+                  key="s40",
+                  on_click=go_to_scene,
+                  args=(41,))
         return
 
-    # Scene 41
     elif sc == 41:
         st.write("Exercising Leadership in a VUCA world entering......")
+
+if __name__ == "__main__":
+    render_scene()
