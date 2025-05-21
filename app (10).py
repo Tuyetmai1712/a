@@ -393,8 +393,12 @@ def render_npc(scene):
         st.session_state.scene = 40
 
 # Main render function
+def go_to_scene(next_scene):
+    st.session_state.scene = next_scene
+    st.experimental_rerun()
 def render_scene():
     sc = st.session_state.scene
+    # Scene 1
     if sc == 1:
         lines = [
             "Chào mừng bạn đến với DAV Leadership Programme – Summer Course 2025",
@@ -408,56 +412,70 @@ def render_scene():
         ]
         for l in lines:
             typewriter(l)
-    if st.button(
-        "Tiếp tục", 
-        key="continue",
-        on_click=go_to_scene,
-        args=(2,)
-    ):
+        if st.button(
+            "Tiếp tục",
+            key="scene1_continue",
+            on_click=go_to_scene,
+            args=(2,)
+        ):
+            return
+    # Scene 2
+    elif sc == 2:
+        st.write("**Bạn đã sẵn sàng tiến vào hành trình này chưa?**")
+        c1, c2 = st.columns(2)
+        c1.button(
+            "Tôi rất sẵn sàng",
+            key="ready_1",
+            on_click=go_to_scene,
+            args=(3,)
+        )
+        c2.button(
+            "Tôi vẫn rất sẵn sàng",
+            key="ready_2",
+            on_click=go_to_scene,
+            args=(3,)
+        )
+        st.caption("Không tìm thấy nút từ bỏ đâu, đừng cố tìm")
         return
-    if sc == 2:
-    st.write("**Bạn đã sẵn sàng tiến vào hành trình này chưa?**")
-    c1, c2 = st.columns(2)
-    c1.button(
-        "Tôi rất sẵn sàng",
-        key="ready_1",
-        on_click=go_to_scene,
-        args=(3,)
-    )
-    c2.button(
-        "Tôi vẫn rất sẵn sàng",
-        key="ready_2",
-        on_click=go_to_scene,
-        args=(3,)
-    )
-    st.caption("Không tìm thấy nút từ bỏ đâu, đừng cố tìm")
-    return
-   if sc == 3:
-       cols = st.columns(3)
-       choices = ["Teaching Assistants","Teaching Fellows","Instructors"]
-       for idx, btn in enumerate(cols):
-           btn.button(
-               choices[idx],
-               key=f"staff_cat_{idx}",
-               on_click=go_to_scene,
-               args=(4 + idx,)
-           )
-           return
-    if sc in staff_options:
+    # Scene 3
+    elif sc == 3:
+        st.write("### Cẩm nang bắt đầu kết nối thế giới DLP4 dành cho Học viên mới")
+        st.write("Gói tìm hiểu về các Staff")
+        cols = st.columns(3)
+        choices = ["Teaching Assistants", "Teaching Fellows", "Instructors"]
+        for idx, btn in enumerate(cols):
+            btn.button(
+                choices[idx],
+                key=f"staff_cat_{idx}",
+                on_click=go_to_scene,
+                args=(4 + idx,)
+            )
+        return
+    # Scenes 4–6
+    elif sc in staff_options:
         for name, nxt in staff_options[sc]:
-            if st.button(name):
-                st.session_state.scene = nxt
+            st.button(
+                name,
+                key=f"staff_{sc}_{name}",
+                on_click=go_to_scene,
+                args=(nxt,)
+            )
         return
-    if 7 <= sc <= 39:
+    # Scenes 7–39
+    elif 7 <= sc <= 39:
         render_npc(sc)
         return
-    if sc == 40:
+    # Scene 40
+    elif sc == 40:
         st.write("## Hành trình DLP4 sắp bắt đầu")
-        if st.button("Nhập vai Học viên, tiến vào DLP4"):
-            st.session_state.scene = 41
+        st.button(
+            "Nhập vai Học viên, tiến vào DLP4",
+            key="to_scene41",
+            on_click=go_to_scene,
+            args=(41,)
+        )
         return
-    if sc == 41:
+    # Scene 41
+    elif sc == 41:
         st.write("Exercising Leadership in a VUCA world entering......")
 
-if __name__ == "__main__":
-    render_scene()
