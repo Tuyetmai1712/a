@@ -408,18 +408,30 @@ def render_scene():
         ]
         for l in lines:
             typewriter(l)
-        if st.button("Tiếp tục"):
-            st.session_state.scene = 2
+        if st.button(
+            "Tiếp tục",
+            key="continue",
+            on_click=go_to_scene,
+            args=(2,)
+)
         return
     if sc == 2:
-        st.write("**Bạn đã sẵn sàng tiến vào hành trình này chưa?**")
-        c1, c2 = st.columns(2)
-        if c1.button("Tôi rất sẵn sàng"):
-            st.session_state.scene = 3
-        if c2.button("Tôi vẫn rất sẵn sàng"):
-            st.session_state.scene = 3
-        st.caption("Không tìm thấy nút từ bỏ đâu, đừng cố tìm")
-        return
+    st.write("**Bạn đã sẵn sàng tiến vào hành trình này chưa?**")
+    c1, c2 = st.columns(2)
+    c1.button(
+        "Tôi rất sẵn sàng",
+        key="ready_1",
+        on_click=go_to_scene,
+        args=(3,)
+    )
+    c2.button(
+        "Tôi vẫn rất sẵn sàng",
+        key="ready_2",
+        on_click=go_to_scene,
+        args=(3,)
+    )
+    st.caption("Không tìm thấy nút từ bỏ đâu, đừng cố tìm")
+    return
     if sc == 3:
         st.write("### Cẩm nang bắt đầu kết nối thế giới DLP4 dành cho Học viên mới")
         st.write("Gói tìm hiểu về các Staff")
